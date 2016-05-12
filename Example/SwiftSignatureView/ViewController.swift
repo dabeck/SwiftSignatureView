@@ -15,8 +15,9 @@ public class ViewController: UIViewController {
     @IBOutlet weak var signatureView: SwiftSignatureView!
     // Use signatureView.signature to get at the signature image
     
-    
     @IBAction func didTapClear(sender: AnyObject) {
+		print(signatureView.coordinates)
+		
         signatureView.clear()
     }
     

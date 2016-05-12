@@ -58,9 +58,12 @@ public class SwiftSignatureView: UIView {
     // MARK: Public Methods
     public func clear() {
         signature = nil
+		coordinates = []
         self.setNeedsDisplay()
     }
-    
+
+	public var coordinates: [CGPoint] = []
+	
     // MARK: Private Methods
     private var previousPoint = CGPointZero
     private var previousEndPoint = CGPointZero
@@ -87,7 +90,7 @@ public class SwiftSignatureView: UIView {
         pan.maximumNumberOfTouches = 1
         self.addGestureRecognizer(pan)
     }
-    
+	
     func tap(tap:UITapGestureRecognizer) {
         let rect = self.bounds
         
@@ -110,6 +113,7 @@ public class SwiftSignatureView: UIView {
             previousEndPoint = previousPoint
         case .Changed:
             let currentPoint = pan.locationInView(self)
+			coordinates.append(currentPoint)
             let strokeLength = distance(previousPoint, pt2: currentPoint)
             if(strokeLength >= 1.0) {
                 let rect = self.bounds
